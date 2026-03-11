@@ -4,11 +4,10 @@ author = 'Deyi'
 copyright = '© 2026, Deyi'
 languageCode = 'en'
 enableInlineShortcodes = true
+theme = "hugo-paper"
 
 [pagination]
   pagerSize = 5
-
-theme = "hugo-paper"
 
 [params]
   color = 'linen'
