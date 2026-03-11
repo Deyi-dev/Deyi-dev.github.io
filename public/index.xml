@@ -1,11 +1,55 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>My New Hugo Project</title>
+    <title>Deyi</title>
     <link>http://localhost:1313/</link>
-    <description>Recent content on My New Hugo Project</description>
+    <description>Recent content on Deyi</description>
     <generator>Hugo</generator>
-    <language>en-us</language>
+    <language>en</language>
+    <copyright>© 2026, Deyi</copyright>
+    <lastBuildDate>Wed, 11 Mar 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hello World</title>
+      <link>http://localhost:1313/post/hello-world/</link>
+      <pubDate>Wed, 11 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/hello-world/</guid>
+      <description>&lt;p&gt;This is the first post. Starting a blog is one of those things I&amp;rsquo;ve put off for too long.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Go Concurrency Patterns I Actually Use</title>
+      <link>http://localhost:1313/post/go-concurrency/</link>
+      <pubDate>Sun, 08 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/go-concurrency/</guid>
+      <description>&lt;p&gt;Go&amp;rsquo;s concurrency model is one of the things that made me fall in love with the language. But it&amp;rsquo;s easy to reach for the wrong tool. Here&amp;rsquo;s what I actually use day to day.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Docker Concepts That Finally Clicked</title>
+      <link>http://localhost:1313/post/docker-basics/</link>
+      <pubDate>Fri, 20 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/docker-basics/</guid>
+      <description>&lt;p&gt;I used Docker for months before I actually understood it. Here are the concepts that finally made it click.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Reading List 2026</title>
+      <link>http://localhost:1313/post/reading-list-2026/</link>
+      <pubDate>Thu, 15 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/reading-list-2026/</guid>
+      <description>&lt;p&gt;Keeping track of what I&amp;rsquo;m reading this year.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>About</title>
+      <link>http://localhost:1313/about/</link>
+      <pubDate>Thu, 01 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/about/</guid>
+      <description>&lt;p&gt;Hey, I&amp;rsquo;m Deyi — a software engineer who likes building things and writing about them.&lt;/p&gt;&#xA;&lt;p&gt;This blog is where I share notes on programming, tools I find useful, and whatever else is on my mind.&lt;/p&gt;&#xA;&lt;h2 id=&#34;skills&#34;&gt;Skills&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Backend: Go, Python, Java&lt;/li&gt;&#xA;&lt;li&gt;Frontend: React, TypeScript&lt;/li&gt;&#xA;&lt;li&gt;Infrastructure: Docker, Kubernetes, GitHub Actions&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;currently&#34;&gt;Currently&lt;/h2&gt;&#xA;&lt;p&gt;Working on side projects and exploring distributed systems.&lt;/p&gt;&#xA;&lt;p&gt;Feel free to reach out on &lt;a href=&#34;https://github.com/Deyi-dev&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Archives</title>
+      <link>http://localhost:1313/archives/</link>
+      <pubDate>Thu, 01 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/archives/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>
