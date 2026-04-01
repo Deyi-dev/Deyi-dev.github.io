@@ -1,9 +1,17 @@
-# Hugo build output
-/public/
-/resources/_gen/
+# Dependencies
+node_modules/
 
-# Hugo cache
-.hugo_build.lock
+# Build output
+dist/
 
 # OS
 .DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Environment
+.env
+.env.local

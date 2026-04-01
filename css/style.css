@@ -1,0 +1,265 @@
+/* Reset */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-accent: #c45f40;
+  --color-text: #0f172a;
+  --color-text-mid: #334155;
+  --color-nav: #475569;
+  --color-muted: #9b9b9b;
+  --color-subtitle: #6b7280;
+  --color-divider: #e8e8e4;
+  --color-bg: #ffffff;
+  --color-year-2026: #c45f40;
+  --color-year-2025: #8b6f47;
+  --color-year-2024: #2d3142;
+
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-article: 'Newsreader', serif;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Layout */
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 32px 24px 0;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--color-text);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav-link {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--color-nav);
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: var(--color-accent);
+}
+
+.nav-link.active {
+  color: var(--color-accent);
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Subtitle */
+.subtitle {
+  font-size: 15px;
+  color: var(--color-subtitle);
+  margin-top: 32px;
+}
+
+/* Divider */
+.divider {
+  border: none;
+  border-top: 1px solid var(--color-divider);
+  margin: 24px 0;
+}
+
+/* Hero - Typewriter */
+.hero {
+  margin-bottom: 48px;
+}
+
+.typewriter {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 28px;
+  letter-spacing: -0.7px;
+  line-height: 42px;
+  color: var(--color-text);
+}
+
+.typewriter .accent {
+  color: var(--color-accent);
+}
+
+
+/* Article list */
+.year-section {
+  margin-bottom: 0;
+}
+
+.article-row {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  padding: 48px 0 0;
+}
+
+.year-section:first-child .article-row:first-child {
+  padding-top: 0;
+}
+
+.article-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.article-title {
+  font-family: var(--font-article);
+  font-weight: 200;
+  font-size: 22px;
+  line-height: 30.25px;
+  margin-bottom: 2px;
+}
+
+.article-title a {
+  transition: opacity 0.2s;
+}
+
+.article-title a:hover {
+  opacity: 0.7;
+}
+
+.year-2026 a { color: var(--color-year-2026); }
+.year-2025 a { color: var(--color-year-2025); }
+.year-2024 a { color: var(--color-year-2024); }
+
+.article-desc {
+  font-size: 15px;
+  color: var(--color-text-mid);
+  line-height: 22.5px;
+  margin-bottom: 6px;
+}
+
+.article-meta {
+  font-size: 13px;
+  color: var(--color-muted);
+  line-height: 19.5px;
+}
+
+.article-thumb {
+  flex-shrink: 0;
+  width: 128px;
+  height: 128px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.article-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0);
+  opacity: 0.8;
+  mix-blend-mode: multiply;
+}
+
+/* Footer */
+.footer {
+  margin-top: 64px;
+  padding-bottom: 48px;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 13px;
+}
+
+.footer-name {
+  font-weight: 500;
+  color: var(--color-nav);
+}
+
+.footer-dot {
+  color: var(--color-muted);
+}
+
+.footer-link {
+  color: var(--color-muted);
+  transition: color 0.2s;
+}
+
+.footer-link:hover {
+  color: var(--color-nav);
+}
+
+.footer-built {
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .page {
+    padding: 20px 20px 0;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .typewriter {
+    font-size: 22px;
+    line-height: 33px;
+  }
+
+  .article-thumb {
+    width: 96px;
+    height: 96px;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}

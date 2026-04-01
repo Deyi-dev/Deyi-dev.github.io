@@ -1,0 +1,75 @@
+// Typewriter: "survive in AI" → deletes only "survive" → types "thrive"
+(function () {
+  const el = document.querySelector('.typewriter-text');
+  if (!el) return;
+
+  const firstWord = 'survive';
+  const suffix = ' in AI';
+  const newWord = 'thrive';
+
+  const TYPE_SPEED = 90;
+  const RETYPE_SPEED = 180;
+  const DELETE_SPEED = 120;
+  const PAUSE_BEFORE_DELETE = 1500;
+  const PAUSE_BEFORE_RETYPE = 400;
+
+  function render(word) {
+    if (word.length === 0) {
+      el.innerHTML = suffix;
+    } else {
+      el.innerHTML = '<span class="accent">' + word + '</span>' + suffix;
+    }
+  }
+
+  // Step 1: type "survive in AI" char by char
+  function typeFullString() {
+    const full = firstWord + suffix;
+    let i = 0;
+    function tick() {
+      if (i <= full.length) {
+        const text = full.slice(0, i);
+        const sp = text.indexOf(' ');
+        if (sp === -1) {
+          el.innerHTML = '<span class="accent">' + text + '</span>';
+        } else {
+          el.innerHTML = '<span class="accent">' + text.slice(0, sp) + '</span>' + text.slice(sp);
+        }
+        i++;
+        setTimeout(tick, TYPE_SPEED);
+      } else {
+        setTimeout(deleteFirstWord, PAUSE_BEFORE_DELETE);
+      }
+    }
+    tick();
+  }
+
+  // Step 2: delete "survive" char by char, " in AI" stays
+  function deleteFirstWord() {
+    let j = firstWord.length;
+    function tick() {
+      if (j > 0) {
+        j--;
+        render(firstWord.slice(0, j));
+        setTimeout(tick, DELETE_SPEED);
+      } else {
+        setTimeout(typeNewWord, PAUSE_BEFORE_RETYPE);
+      }
+    }
+    tick();
+  }
+
+  // Step 3: type "thrive" char by char
+  function typeNewWord() {
+    let j = 0;
+    function tick() {
+      if (j <= newWord.length) {
+        render(newWord.slice(0, j));
+        j++;
+        setTimeout(tick, RETYPE_SPEED);
+      }
+    }
+    tick();
+  }
+
+  typeFullString();
+})();
