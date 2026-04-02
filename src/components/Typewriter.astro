@@ -1,4 +1,12 @@
-// Typewriter: "survive in AI" → deletes only "survive" → types "thrive"
+---
+---
+<section class="hero">
+  <h1 class="typewriter">
+    <span class="typewriter-text"></span>
+  </h1>
+</section>
+
+<script is:inline>
 (function () {
   const el = document.querySelector('.typewriter-text');
   if (!el) return;
@@ -21,7 +29,6 @@
     }
   }
 
-  // Step 1: type "survive in AI" char by char
   function typeFullString() {
     const full = firstWord + suffix;
     let i = 0;
@@ -43,7 +50,6 @@
     tick();
   }
 
-  // Step 2: delete "survive" char by char, " in AI" stays
   function deleteFirstWord() {
     let j = firstWord.length;
     function tick() {
@@ -58,7 +64,6 @@
     tick();
   }
 
-  // Step 3: type "thrive" char by char
   function typeNewWord() {
     let j = 0;
     function tick() {
@@ -73,3 +78,4 @@
 
   typeFullString();
 })();
+</script>

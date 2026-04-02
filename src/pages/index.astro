@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Typewriter from '../components/Typewriter.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const grouped: Record<number, typeof posts> = {};
+for (const post of posts) {
+  const year = post.data.date.getFullYear();
+  (grouped[year] ??= []).push(post);
+}
+const years = Object.keys(grouped).map(Number).sort((a, b) => b - a);
+---
+<BaseLayout title="Deyi Zou - Blog" currentPage="blog">
+  <p class="subtitle">engineer, painter, snowboarder</p>
+  <hr class="divider">
+  <Typewriter />
+
+  <main class="article-list">
+    {years.map(year => (
+      <section class="year-section">
+        {grouped[year].map(post => (
+          <ArticleCard
+            title={post.data.title}
+            description={post.data.description}
+            date={post.data.date}
+            readTime={post.data.readTime}
+            thumbnail={post.data.thumbnail}
+            slug={post.slug}
+            year={year}
+          />
+        ))}
+      </section>
+    ))}
+  </main>
+</BaseLayout>

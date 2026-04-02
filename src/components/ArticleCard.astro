@@ -1,0 +1,31 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  readTime: string;
+  thumbnail: string;
+  slug: string;
+  year: number;
+}
+
+const { title, description, date, readTime, thumbnail, slug, year } = Astro.props;
+
+const formattedDate = date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+<article class="article-row">
+  <div class="article-content">
+    <h2 class={`article-title year-${year}`}>
+      <a href={`/blog/${slug}`}>{title}</a>
+    </h2>
+    <p class="article-desc">{description}</p>
+    <p class="article-meta">{formattedDate} &middot; {readTime}</p>
+  </div>
+  <div class="article-thumb">
+    <img src={thumbnail} alt="">
+  </div>
+</article>

@@ -1,0 +1,21 @@
+---
+interface Props {
+  currentPage?: string;
+}
+
+const { currentPage = 'blog' } = Astro.props;
+---
+<header class="header">
+  <a href="/" class="logo">Deyi Zou</a>
+  <nav class="nav">
+    <a href="/" class:list={['nav-link', { active: currentPage === 'blog' }]}>Blog</a>
+    <a href="/projects" class:list={['nav-link', { active: currentPage === 'projects' }]}>Projects</a>
+    <a href="/about" class:list={['nav-link', { active: currentPage === 'about' }]}>About</a>
+    <button class="theme-toggle" aria-label="Toggle dark mode">
+      <img src="/images/darkmode.svg" alt="" width="15" height="15">
+    </button>
+    <a href="/feed.xml" class="nav-link" aria-label="RSS Feed">
+      <img src="/images/rss.svg" alt="" width="11" height="13">
+    </a>
+  </nav>
+</header>
