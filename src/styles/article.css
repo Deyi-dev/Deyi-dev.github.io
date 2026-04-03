@@ -159,10 +159,7 @@
   border-radius: 3px;
 }
 
-[data-theme="dark"] .article-body pre {
-  background: #1e293b;
-}
-
+[data-theme="dark"] .article-body pre,
 [data-theme="dark"] .article-body code {
   background: #1e293b;
 }

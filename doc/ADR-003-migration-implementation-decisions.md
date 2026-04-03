@@ -62,9 +62,19 @@
 
 ### 6. 最小依赖原则
 
-**决策**：`package.json` 生产依赖保持最小化。当前依赖为：`astro`、`@fontsource-variable/geist`、`@fontsource-variable/geist-mono`。
+**决策**：`package.json` 生产依赖保持最小化。当前依赖为：`astro`、`@fontsource-variable/geist`、`@fontsource-variable/geist-mono`。开发依赖为：`vitest`、`jsdom`。
 
-**理由**：最小化依赖树降低了供应链攻击风险、减少了 `npm install` 时间、减少了版本冲突可能。fontsource 包的引入是为了自托管 Geist 字体（见 §2 字体选型），消除对外部 CDN 的运行时依赖。当需要具体功能时（如 RSS、sitemap），再按需添加官方集成包（`@astrojs/rss`、`@astrojs/sitemap`）。
+**理由**：最小化依赖树降低了供应链攻击风险、减少了 `npm install` 时间、减少了版本冲突可能。fontsource 包的引入是为了自托管 Geist 字体（见 §2 字体选型），消除对外部 CDN 的运行时依赖。vitest 和 jsdom 作为 devDependencies 不影响生产构建产物。当需要具体功能时（如 RSS、sitemap），再按需添加官方集成包（`@astrojs/rss`、`@astrojs/sitemap`）。
+
+### 7. 测试框架与可测试代码组织
+
+**决策**：使用 vitest + jsdom 作为测试框架。可测试的纯逻辑提取到 `src/utils/` 目录，测试文件与源文件同目录放置（`theme.ts` → `theme.test.ts`）。
+
+**理由**：Astro 官方推荐 vitest 作为测试工具。jsdom 提供浏览器 API 模拟（localStorage、matchMedia、DOM），使得依赖浏览器环境的逻辑可以在 Node.js 中测试。测试文件与源文件同目录便于发现和维护。
+
+**模式**：当组件中的 JavaScript 逻辑超出简单的 DOM 操作（如主题切换涉及 localStorage 读写、系统偏好检测、状态持久化），将逻辑提取到 `src/utils/` 中的纯 TypeScript 函数，组件通过 import 调用。这样逻辑可被单元测试覆盖，组件保持薄壳。
+
+**何时需要重新审视**：当需要测试 Astro 组件的渲染输出时，考虑引入 `@astrojs/test-utils` 或 Playwright 进行集成/E2E 测试。
 
 ## 后果
 
