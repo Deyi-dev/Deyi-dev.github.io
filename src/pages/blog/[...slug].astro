@@ -4,6 +4,7 @@ import '@fontsource-variable/geist';
 import '@fontsource-variable/geist-mono';
 import '../../styles/global.css';
 import '../../styles/article.css';
+import ThemeInit from '../../components/ThemeInit.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -36,6 +37,7 @@ const formattedDate = post.data.date.toLocaleDateString('en-US', {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,200;400;500;600&display=swap" rel="stylesheet">
+  <ThemeInit />
 </head>
 <body>
   <!-- Sticky Navigation -->

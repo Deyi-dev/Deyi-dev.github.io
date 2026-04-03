@@ -4,6 +4,7 @@ import '@fontsource-variable/geist-mono';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import ThemeInit from '../components/ThemeInit.astro';
 
 interface Props {
   title?: string;
@@ -21,6 +22,7 @@ const { title = 'Deyi Zou - Blog', currentPage = 'blog' } = Astro.props;
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,200;400;500;600&display=swap" rel="stylesheet">
+  <ThemeInit />
 </head>
 <body>
   <div class="page">
