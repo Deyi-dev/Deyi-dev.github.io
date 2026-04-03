@@ -17,6 +17,7 @@
   --color-year-2026: #c45f40;
   --color-year-2025: #8b6f47;
   --color-year-2024: #2d3142;
+  --fill-0: #475569;
 
   --font-display: 'Newsreader', serif;
   --font-body: 'Geist Variable', sans-serif;
@@ -24,8 +25,31 @@
   --font-article: 'Newsreader', serif;
 }
 
+[data-theme="dark"] {
+  --color-bg: #0f172a;
+  --color-text: #f1f5f9;
+  --color-text-mid: #cbd5e1;
+  --color-nav: #94a3b8;
+  --color-muted: #64748b;
+  --color-subtitle: #94a3b8;
+  --color-divider: #1e293b;
+  --color-year-2026: #e07a5f;
+  --color-year-2025: #c4a07a;
+  --color-year-2024: #818cf8;
+  --fill-0: #94a3b8;
+}
+
+[data-theme="dark"] .theme-toggle img {
+  filter: brightness(0) saturate(0) invert(1) opacity(0.55);
+}
+
+[data-theme="dark"] .nav a img {
+  filter: brightness(0) saturate(0) invert(1) opacity(0.55);
+}
+
 html {
   overflow-y: scroll;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 body {
@@ -201,6 +225,16 @@ a {
   filter: saturate(0);
   opacity: 0.8;
   mix-blend-mode: multiply;
+}
+
+[data-theme="dark"] .article-thumb img {
+  mix-blend-mode: screen;
+  opacity: 0.6;
+}
+
+[data-theme="dark"] .timeline-tag {
+  background: #1e293b !important;
+  color: var(--color-text-mid);
 }
 
 /* Footer */

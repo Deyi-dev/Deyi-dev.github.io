@@ -1,0 +1,31 @@
+---
+// No props — this component only outputs scripts.
+---
+
+<!--
+  Anti-flash: runs synchronously in <head> before first paint.
+  Must be is:inline so Astro doesn't defer it.
+  Mirrors the logic in src/utils/theme.ts (getInitialTheme + applyTheme).
+-->
+<script is:inline>
+  (function () {
+    try {
+      var s = localStorage.getItem('theme');
+      var theme = (s === 'light' || s === 'dark')
+        ? s
+        : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch (_) {}
+  })();
+</script>
+
+<!--
+  Toggle handler: Astro bundles this as a module, executed after DOM ready.
+  Imports the tested logic from src/utils/theme.ts.
+-->
+<script>
+  import { toggleTheme } from '../utils/theme';
+  document.querySelectorAll<HTMLButtonElement>('.theme-toggle').forEach(btn => {
+    btn.addEventListener('click', toggleTheme);
+  });
+</script>
