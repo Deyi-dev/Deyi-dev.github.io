@@ -6,7 +6,10 @@ interface Props {
 const { currentPage = 'blog' } = Astro.props;
 ---
 <header class="header">
-  <a href="/" class="logo">Deyi Zou</a>
+  <div class="header-left">
+    <a href="/" class="logo">Deyi Zou</a>
+    <p class="subtitle">engineer, &nbsp; painter, &nbsp; snowboarder</p>
+  </div>
   <nav class="nav">
     <a href="/" class:list={['nav-link', { active: currentPage === 'blog' }]}>Blog</a>
     <a href="/projects" class:list={['nav-link', { active: currentPage === 'projects' }]}>Projects</a>

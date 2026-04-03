@@ -18,10 +18,14 @@
   --color-year-2025: #8b6f47;
   --color-year-2024: #2d3142;
 
-  --font-display: 'Playfair Display', serif;
-  --font-body: 'Inter', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-display: 'Newsreader', serif;
+  --font-body: 'Geist Variable', sans-serif;
+  --font-mono: 'Geist Mono Variable', monospace;
   --font-article: 'Newsreader', serif;
+}
+
+html {
+  overflow-y: scroll;
 }
 
 body {
@@ -46,8 +50,14 @@ a {
 /* Header */
 .header {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .logo {
@@ -89,9 +99,8 @@ a {
 
 /* Subtitle */
 .subtitle {
-  font-size: 15px;
+  font-size: 13px;
   color: var(--color-subtitle);
-  margin-top: 32px;
 }
 
 /* Divider */
@@ -103,7 +112,9 @@ a {
 
 /* Hero - Typewriter */
 .hero {
-  margin-bottom: 48px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  min-height: 42px;
 }
 
 .typewriter {
@@ -127,9 +138,8 @@ a {
 
 .article-row {
   display: flex;
-  gap: 32px;
   align-items: flex-start;
-  padding: 48px 0 0;
+  padding: 20px 0 0;
 }
 
 .year-section:first-child .article-row:first-child {

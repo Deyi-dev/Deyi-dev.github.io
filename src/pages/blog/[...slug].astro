@@ -1,6 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import '@fontsource-variable/geist';
+import '@fontsource-variable/geist-mono';
+import '../../styles/global.css';
+import '../../styles/article.css';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -12,18 +15,117 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await post.render();
+
+const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .filter(p => p.slug !== post.slug)
+  .slice(0, 2);
+
+const formattedDate = post.data.date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
 ---
-<BaseLayout title={`${post.data.title} - Deyi Zou`} currentPage="blog">
-  <article class="post">
-    <header>
-      <h1 class="post-title">{post.data.title}</h1>
-      <p class="article-meta">
-        {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-        &middot; {post.data.readTime}
-      </p>
-    </header>
-    <div class="prose">
-      <Content />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{post.data.title} - Deyi Zou</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,200;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Sticky Navigation -->
+  <nav class="article-nav">
+    <div class="article-nav-inner">
+      <a href="/" class="article-nav-back">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7.5 9L4.5 6L7.5 3" stroke="#6b6b6b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Deyi's Workshop
+      </a>
+      <div class="article-nav-actions">
+        <button class="theme-toggle" aria-label="Toggle dark mode">
+          <img src="/images/darkmode.svg" alt="" width="15" height="15">
+        </button>
+        <a href="/feed.xml" aria-label="RSS Feed">
+          <img src="/images/rss.svg" alt="" width="11" height="13">
+        </a>
+      </div>
     </div>
-  </article>
-</BaseLayout>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="article-page">
+    <article>
+      <!-- Article Header -->
+      <header class="article-header">
+        <h1 class="article-page-title">{post.data.title}</h1>
+        <p class="article-page-subtitle">{post.data.description}</p>
+        <p class="article-page-meta">{formattedDate} &middot; {post.data.readTime}</p>
+      </header>
+
+      <!-- Article Body -->
+      <div class="article-body prose">
+        <Content />
+      </div>
+    </article>
+
+    <!-- Footer Section -->
+    <footer class="article-page-footer">
+      <div class="article-share">
+        <button class="share-btn" id="copy-link-btn">
+          <svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.5 4H10.5M1.5 4C1.5 5.65685 2.84315 7 4.5 7H6M13.5 4C13.5 2.34315 12.1569 1 10.5 1H9" stroke="#6b6b6b" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          <span id="copy-link-text">Copy link to share</span>
+        </button>
+      </div>
+
+      {allPosts.length > 0 && (
+        <div class="more-writing">
+          <h3 class="more-writing-heading">More writing</h3>
+          <ul class="more-writing-list">
+            {allPosts.map(p => (
+              <li class="more-writing-item">
+                <a href={`/blog/${p.slug}`} class="more-writing-link">
+                  <span class="more-writing-title">{p.data.title}</span>
+                  <span class="more-writing-meta">
+                    {p.data.date.getFullYear()}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <hr class="divider">
+      <div class="article-footer-bar">
+        <nav class="footer-nav">
+          <span class="footer-name">Deyi</span>
+          <a href="https://github.com/Deyi-dev" class="footer-link">GitHub</a>
+          <a href="#" class="footer-link">X</a>
+          <a href="#" class="footer-link">LinkedIn</a>
+        </nav>
+        <span class="footer-built">Built with &#9749;</span>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const btn = document.getElementById('copy-link-btn');
+    const text = document.getElementById('copy-link-text');
+    if (btn && text) {
+      btn.addEventListener('click', async () => {
+        await navigator.clipboard.writeText(window.location.href);
+        text.textContent = 'Link copied!';
+        setTimeout(() => { text.textContent = 'Copy link to share'; }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>

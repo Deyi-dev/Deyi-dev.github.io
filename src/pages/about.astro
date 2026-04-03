@@ -1,7 +1,392 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const timeline = [
+  { year: '2015', label: 'Railway engineer', tag: 'China', tagColor: '#f3f4f6' },
+  { year: '2018', label: 'Decided to pivot', tag: 'China', tagColor: '#f5f2ed' },
+  { year: '2020', label: 'Moved to Waterloo', tag: 'Canada', tagColor: '#fdf2f0' },
+  { year: '2022', label: 'First production ML code', tag: 'AI / ML', tagColor: '#fdf2f0' },
+  { year: '2024', label: 'RAG systems at scale', tag: 'AI / ML', tagColor: '#fdf2f0' },
+  { year: '2025', label: 'AWS AI Practitioner', tag: 'AI / ML', tagColor: '#fdf2f0' },
+  { year: '2026', label: 'Now', tag: 'AI / ML', tagColor: '#fdf2f0', active: true },
+];
+
+const asciiFrames = [
+  `[User Intent]
+      |
+      v
+ +---------+      +----------+
+ | Planner | ---> | Executor |
+ +---------+      +----------+
+      ^                |
+      |                v
+      +------- {Reflect & Learn}
+                       |
+                       v
+               [ Thrive in AI ]`,
+  `[User Intent]
+      |
+      v
+ +---------+      +----------+
+ | Planner | ===> | Executor |
+ +---------+      +----------+
+      ^                |
+      |                v
+      +------- {Reflect & Learn}
+                       |
+                       v
+               [ Thrive in AI ]`,
+];
 ---
 <BaseLayout title="About - Deyi Zou" currentPage="about">
-  <h1>About</h1>
-  <p class="subtitle">Coming soon.</p>
+  <main class="about-main">
+    <!-- Intro Section -->
+    <section class="about-intro">
+      <h1 class="about-heading">I'm Deyi — an AI/ML engineer based in Waterloo, Ontario.</h1>
+      <div class="about-prose">
+        <p>My journey into the world of silicon and neural networks didn't start in a traditional computer science lab. For years, I navigated the physical world as a Railway Engineer in China, managing the complex systems that move millions of people across vast distances. It was a career built on steel, precision, and heavy infrastructure.</p>
+        <p>However, the pull of the digital frontier was irresistible. I saw how the logic of systems I built for trains could be translated into the logic of intelligence. A pivot across oceans and disciplines led me to Canada, where I traded track blueprints for model architectures.</p>
+        <p>Today, I bridge the gap between abstract research and production-grade AI. Moving from the tangible weight of locomotives to the ephemeral weight of transformer layers has been the most challenging and rewarding journey of my life.</p>
+      </div>
+    </section>
+
+    <!-- Terminal Section -->
+    <section class="terminal-section">
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+          </div>
+          <span class="terminal-title">deyi_journey.sh</span>
+        </div>
+        <div class="terminal-body">
+          <pre class="terminal-pre" id="ascii-art">{asciiFrames[0]}</pre>
+        </div>
+      </div>
+      <div class="slider-section">
+        <div class="slider-label">
+          <span class="slider-label-text">Evolution Stage</span>
+          <span class="slider-label-year" id="slider-year">2026</span>
+        </div>
+        <div class="slider-track">
+          <input type="range" min="0" max="6" value="6" class="slider-input" id="timeline-slider" />
+        </div>
+        <p class="slider-hint">Interactive: 6-frame ASCII art animation... Pure JS, no dependencies.</p>
+      </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section">
+      <div class="timeline-line"></div>
+      <div class="timeline-items">
+        {timeline.map((item) => (
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <span class="timeline-tag" style={`background: ${item.tagColor}`}>{item.tag}</span>
+              <h3 class="timeline-label">{item.year} {item.label}</h3>
+            </div>
+            <div class:list={['timeline-dot', { active: item.active }]}></div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- What I Work With -->
+    <section class="about-section">
+      <h2 class="about-section-heading">What I Work With</h2>
+      <div class="about-prose">
+        <p>In the current landscape of rapid AI advancement, I focus on building robust, scalable systems. My daily toolbox involves architecting with <strong>LangChain</strong> and <strong>Python</strong>, orchestrating workflows using <strong>Anthropic</strong> and <strong>OpenAI APIs</strong>, and deploying across <strong>AWS</strong> infrastructure. On the front end, I enjoy building intuitive interfaces with <strong>React</strong> and <strong>TypeScript</strong> to make complex AI agents accessible to users.</p>
+      </div>
+    </section>
+
+    <!-- Beyond Code -->
+    <section class="about-section">
+      <h2 class="about-section-heading">Beyond Code</h2>
+      <div class="about-prose">
+        <p>When the screen goes dark, you'll likely find me on the slopes. Snowboarding in Ontario winters offers a different kind of flow state than debugging a model. I also harbor a nostalgic obsession with childhood collectible cards — remnants of a time when "data" was something you could physically hold and trade.</p>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="about-contact">
+      <p class="about-prose-text">Want to chat? Find me on <a href="https://github.com/Deyi-dev" class="inline-link">GitHub</a>, <a href="#" class="inline-link">X</a>, or <a href="mailto:deyi@example.com" class="inline-link">drop me an email</a>.</p>
+    </section>
+  </main>
 </BaseLayout>
+
+<style>
+  .about-main {
+    margin-top: 48px;
+  }
+
+  .about-heading {
+    font-family: var(--font-article);
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.4;
+    color: var(--color-text);
+    margin-bottom: 32px;
+  }
+
+  .about-prose {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .about-prose p,
+  .about-prose-text {
+    font-family: var(--font-article);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--color-text-mid);
+  }
+
+  .about-prose strong {
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .inline-link {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .inline-link:hover {
+    opacity: 0.8;
+  }
+
+  /* Terminal */
+  .terminal-section {
+    margin-top: 48px;
+  }
+
+  .terminal-window {
+    border: 1px solid var(--color-divider);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  .terminal-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    background: #f0f0ee;
+  }
+
+  .terminal-dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  .dot-red { background: #ff5f56; }
+  .dot-yellow { background: #ffbd2e; }
+  .dot-green { background: #27c93f; }
+
+  .terminal-title {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-text-mid);
+  }
+
+  .terminal-body {
+    background: #1e1e1e;
+    padding: 24px;
+  }
+
+  .terminal-pre {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.6;
+    color: #4af626;
+    white-space: pre;
+    overflow-x: auto;
+  }
+
+  .slider-section {
+    margin-top: 16px;
+  }
+
+  .slider-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .slider-label-text {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-muted);
+  }
+
+  .slider-label-year {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .slider-track {
+    width: 100%;
+    position: relative;
+  }
+
+  .slider-input {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 2px;
+    background: var(--color-divider);
+    outline: none;
+    cursor: pointer;
+  }
+
+  .slider-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    cursor: pointer;
+  }
+
+  .slider-input::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    cursor: pointer;
+    border: none;
+  }
+
+  .slider-hint {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-muted);
+    margin-top: 8px;
+  }
+
+  /* Timeline */
+  .timeline-section {
+    margin-top: 48px;
+    position: relative;
+    padding-left: 20px;
+  }
+
+  .timeline-line {
+    position: absolute;
+    left: 4px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--color-divider);
+  }
+
+  .timeline-items {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .timeline-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -20px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-divider);
+    transform: translateX(-0.5px);
+  }
+
+  .timeline-dot.active {
+    background: var(--color-accent);
+  }
+
+  .timeline-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .timeline-tag {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .timeline-label {
+    font-family: var(--font-article);
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-text);
+  }
+
+  /* Sections */
+  .about-section {
+    margin-top: 48px;
+  }
+
+  .about-section-heading {
+    font-family: var(--font-article);
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1.4;
+    color: var(--color-text);
+    margin-bottom: 16px;
+  }
+
+  .about-contact {
+    margin-top: 48px;
+  }
+
+  @media (max-width: 480px) {
+    .about-heading {
+      font-size: 20px;
+    }
+
+    .about-prose p,
+    .about-prose-text {
+      font-size: 16px;
+    }
+
+    .terminal-pre {
+      font-size: 9px;
+    }
+  }
+</style>
+
+<script>
+  const years = ['2015', '2018', '2020', '2022', '2024', '2025', '2026'];
+  const slider = document.getElementById('timeline-slider') as HTMLInputElement;
+  const yearLabel = document.getElementById('slider-year');
+
+  if (slider && yearLabel) {
+    slider.addEventListener('input', () => {
+      yearLabel.textContent = years[parseInt(slider.value)];
+    });
+  }
+</script>

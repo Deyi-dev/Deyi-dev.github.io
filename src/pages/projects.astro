@@ -1,7 +1,200 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const projects = [
+  {
+    title: 'Enterprise RAG System',
+    description: 'A high-performance retrieval-augmented generation system designed for enterprise-scale document processing and semantic search across millions of vectors.',
+    image: '/images/project-rag.png',
+    tags: ['Python', 'LangChain', 'Pinecone', 'FastAPI'],
+    github: '#',
+    live: '#',
+  },
+  {
+    title: 'AI Agent Testing Framework',
+    description: 'Automated evaluation suite for LLM-based agents, focusing on trajectory analysis, tool-use accuracy, and prompt robustness testing.',
+    image: '/images/project-agent.png',
+    tags: ['TypeScript', 'OpenAI', 'Jest', 'Docker'],
+    github: '#',
+    live: '#',
+  },
+  {
+    title: 'Personal Blog',
+    description: 'A custom-built minimal publishing platform optimized for reading experience, featuring mathematical notation support and dark mode.',
+    image: '/images/project-blog.png',
+    tags: ['Next.js', 'Tailwind CSS', 'MDX', 'Vercel'],
+    github: '#',
+    live: '#',
+  },
+];
 ---
 <BaseLayout title="Projects - Deyi Zou" currentPage="projects">
-  <h1>Projects</h1>
-  <p class="subtitle">Coming soon.</p>
+  <main class="projects-main">
+    <h1 class="projects-heading">Things I've built</h1>
+
+    <div class="project-list">
+      {projects.map((project) => (
+        <article class="project-card">
+          <h2 class="project-title">{project.title}</h2>
+          <p class="project-desc">{project.description}</p>
+          <div class="project-image-wrapper">
+            <img src={project.image} alt={project.title} class="project-image" />
+          </div>
+          <div class="project-footer">
+            <span class="project-tags">{project.tags.join(' · ')}</span>
+            <div class="project-links">
+              <a href={project.github} class="project-link">
+                GitHub <span class="link-arrow">↗</span>
+              </a>
+              <a href={project.live} class="project-link">
+                Live <span class="link-arrow">↗</span>
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <section class="open-source-section">
+      <h2 class="open-source-heading">Open source</h2>
+      <p class="open-source-desc">
+        I believe in contributing back to the tools I use every day. Most of my active work can be found on my <a href="https://github.com/Deyi-dev" class="inline-link">GitHub profile</a>. I have recently contributed to AutoGPT, LangGraph, and various smaller libraries in the Python ecosystem.
+      </p>
+    </section>
+  </main>
 </BaseLayout>
+
+<style>
+  .projects-main {
+    margin-top: 48px;
+  }
+
+  .projects-heading {
+    font-family: var(--font-article);
+    font-weight: 200;
+    font-size: 32px;
+    line-height: 1.5;
+    color: var(--color-text);
+    margin-bottom: 48px;
+  }
+
+  .project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+  }
+
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .project-title {
+    font-family: var(--font-article);
+    font-weight: 200;
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--color-text);
+  }
+
+  .project-desc {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-text-mid);
+  }
+
+  .project-image-wrapper {
+    width: 100%;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #e2e8f0;
+    padding-top: 4px;
+  }
+
+  .project-image {
+    width: 100%;
+    display: block;
+    border-radius: 6px 6px 0 0;
+  }
+
+  .project-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .project-tags {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--color-muted);
+    line-height: 20px;
+  }
+
+  .project-links {
+    display: flex;
+    gap: 24px;
+  }
+
+  .project-link {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.2s;
+  }
+
+  .project-link:hover {
+    color: var(--color-accent);
+  }
+
+  .link-arrow {
+    color: var(--color-accent);
+    font-size: 12px;
+  }
+
+  .open-source-section {
+    margin-top: 64px;
+  }
+
+  .open-source-heading {
+    font-family: var(--font-article);
+    font-weight: 200;
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--color-text);
+    margin-bottom: 16px;
+  }
+
+  .open-source-desc {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-text-mid);
+  }
+
+  .inline-link {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .inline-link:hover {
+    opacity: 0.8;
+  }
+
+  @media (max-width: 480px) {
+    .projects-heading {
+      font-size: 26px;
+    }
+
+    .project-footer {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+  }
+</style>
