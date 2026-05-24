@@ -17,6 +17,7 @@ Figma REST API 路径开发完成（MCP 额度耗尽后的备选方案，效果�
 - 思路：参考 Astro 官方 blog 模板的 tag 实现，预计 1 小时
 
 ## 下一步
+[占位 — 这里写你真实的下一步。示例格式：]
 1. 完成 [tag].astro 标签分类页
 2. 集成 Giscus 评论
 3. 添加 @astrojs/sitemap 和 @astrojs/rss

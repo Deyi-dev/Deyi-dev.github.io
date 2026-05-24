@@ -50,12 +50,4 @@ Append-only。重审旧决策时新增条目，旧条目只允许追加"状态"�
 ---
 
 
-[2026-04-02-I1] 集成 Giscus 评论系统
-价值：博客互动基础设施；基于 GitHub Discussions 无需额外后端。
-验证：在 BaseLayout 加一个组件试一篇文章，观察加载性能和 UX。
-
-[2026-04-02-I2] 实现标签分类页 src/pages/tags/[tag].astro
-价值：博客基础导航能力，D9 的 Content Collections 已为此铺路。
-验证：参考 Astro 官方 blog 模板的 tag 实现，预计 1 小时完成。
-
 [2026-04-02-I3] 验证 RSS 和 SEO, maybe seo  for ai agent
