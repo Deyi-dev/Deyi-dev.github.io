@@ -47,6 +47,10 @@ Append-only。重审旧决策时新增条目，旧条目只允许追加"状态"�
 模式：组件 JS 超出简单 DOM 操作时（如主题切换），逻辑提取为 src/utils/ 纯 TS 函数，组件保持薄壳。
 重审：需要测试 Astro 组件渲染输出时引入 @astrojs/test-utils 或 Playwright。
 
+[2026-05-24-D12] 绑定自有域名 deyi.dev，替代 deyi-dev.github.io
+原因：SEO 权重/外链/读者认知累积到自有域名上；将来换平台可无损平移 URL，避免被 github.io 锁定。这是「先静态攒用户、要付费再迁移」整条渐进路线成立的前提。
+实现：astro.config.mjs site 改为 https://deyi.dev；新增 public/CNAME=deyi.dev。DNS 侧需在注册商配 apex A 记录指向 GitHub Pages（185.199.108-111.153）。
+
 ---
 
 
