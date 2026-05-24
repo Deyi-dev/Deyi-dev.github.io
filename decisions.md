@@ -51,6 +51,18 @@ Append-only。重审旧决策时新增条目，旧条目只允许追加"状态"�
 原因：SEO 权重/外链/读者认知累积到自有域名上；将来换平台可无损平移 URL，避免被 github.io 锁定。这是「先静态攒用户、要付费再迁移」整条渐进路线成立的前提。
 实现：astro.config.mjs site 改为 https://deyi.dev；新增 public/CNAME=deyi.dev。DNS 侧需在注册商配 apex A 记录指向 GitHub Pages（185.199.108-111.153）。
 
+[2026-05-24-D13] 补齐 SEO + RSS + OG 基建
+原因：体检发现可发现性基建几乎全缺——/feed.xml 指向 404、无 description/canonical/OG/sitemap/robots/JSON-LD。这些是「被搜到/被分享」的入场券，且全是构建期产物，契合静态架构与最小依赖原则。
+实现：
+- @astrojs/rss → src/pages/feed.xml.ts（修好原 RSS 图标的坏链；同时是「博客→邮件」桥）。
+- @astrojs/sitemap → 自动生成 sitemap-index.xml；public/robots.txt 指向它。
+- BaseLayout + 文章页加 description / canonical / OG / Twitter Card meta，OG 图复用 frontmatter 的 thumbnail（首页缺省用 /images/robot.png）。
+- 文章页加 schema.org BlogPosting JSON-LD。
+遵循 D11：可测纯逻辑抽到 src/utils/seo.ts、src/utils/feed.ts（absoluteUrl / buildArticleJsonLd / postsToFeedItems），红-绿 TDD，组件/端点保持薄壳。
+
+[2026-05-24-D14] OG 分享卡片与 Google SEO 区别对待
+原因：OG/Twitter Card 服务「被分享」渠道（X/LinkedIn/微信预览），早期真实流量主要来自分享而非 Google，故其实际优先级高于纯 Google SEO。技术上与 SEO meta 一起做，但目的不同。
+
 ---
 
 

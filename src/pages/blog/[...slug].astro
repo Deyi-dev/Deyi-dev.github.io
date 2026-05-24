@@ -5,6 +5,7 @@ import '@fontsource-variable/geist-mono';
 import '../../styles/global.css';
 import '../../styles/article.css';
 import ThemeInit from '../../components/ThemeInit.astro';
+import { absoluteUrl, buildArticleJsonLd } from '../../utils/seo';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -27,6 +28,18 @@ const formattedDate = post.data.date.toLocaleDateString('en-US', {
   month: 'long',
   day: 'numeric',
 });
+
+const site = Astro.site!.href;
+const canonical = new URL(`/blog/${post.slug}/`, site).href;
+const ogImage = absoluteUrl(post.data.thumbnail, site);
+const jsonLd = buildArticleJsonLd({
+  title: post.data.title,
+  description: post.data.description,
+  url: canonical,
+  image: ogImage,
+  date: post.data.date,
+  author: 'Deyi Zou',
+});
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -34,9 +47,23 @@ const formattedDate = post.data.date.toLocaleDateString('en-US', {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{post.data.title} - Deyi Zou</title>
+  <meta name="description" content={post.data.description}>
+  <link rel="canonical" href={canonical}>
+  <meta property="og:type" content="article">
+  <meta property="og:title" content={post.data.title}>
+  <meta property="og:description" content={post.data.description}>
+  <meta property="og:url" content={canonical}>
+  <meta property="og:image" content={ogImage}>
+  <meta property="article:published_time" content={post.data.date.toISOString()}>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={post.data.title}>
+  <meta name="twitter:description" content={post.data.description}>
+  <meta name="twitter:image" content={ogImage}>
+  <link rel="alternate" type="application/rss+xml" title="Deyi's Workshop" href="/feed.xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,200;400;500;600&display=swap" rel="stylesheet">
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <ThemeInit />
 </head>
 <body>

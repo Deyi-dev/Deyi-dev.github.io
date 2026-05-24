@@ -23,7 +23,7 @@
 - 早期真实流量来自分发，不来自 Google（Google 是数月后才发酵的慢变量）。
 - 我能帮的：发布前检查 meta 是否齐备；不能代替写作与分发。
 
-## P1 — 绑定自有域名 deyi.dev（管道 · 必须最先）
+## P1 — 绑定自有域名 deyi.dev（管道 · 必须最先）✅ 已完成（仓库侧；DNS 待用户配）
 
 - 已购入 deyi.dev（apex 域名）。
 - 仓库侧：
@@ -32,7 +32,7 @@
 - DNS 侧（用户在注册商操作）：apex 指向 GitHub Pages 的 A 记录（185.199.108–111.153），可选 www CNAME 到 `deyi-dev.github.io`。
 - 为何最先：SEO 权重/外链/读者认知都累积到域名上；先定域名再铺 SEO。
 
-## P2 — SEO + RSS + OG 基建（管道）
+## P2 — SEO + RSS + OG 基建（管道）✅ 已完成
 
 当前体检（已查仓库）缺失项：
 - `/feed.xml` **指向 404**：`Header.astro:21`、`blog/[...slug].astro:57` 有 RSS 图标，但没有 feed 页面、没装 `@astrojs/rss`。🔴
