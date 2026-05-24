@@ -63,6 +63,10 @@ Append-only。重审旧决策时新增条目，旧条目只允许追加"状态"�
 [2026-05-24-D14] OG 分享卡片与 Google SEO 区别对待
 原因：OG/Twitter Card 服务「被分享」渠道（X/LinkedIn/微信预览），早期真实流量主要来自分享而非 Google，故其实际优先级高于纯 Google SEO。技术上与 SEO meta 一起做，但目的不同。
 
+[2026-05-24-D15] SEO/OG/feed「接线」用产物断言测试，不用浏览器
+原因：meta/JSON-LD/RSS/sitemap 是静态文本产物，无运行时交互，浏览器点击帮不上忙。在 jsdom 环境用 DOMParser 解析 dist/ 的 <head> 即可断言（tests/seo-output.test.ts，beforeAll 缺 dist 时自构建）。扩展 D11：纯逻辑走 src/utils/ 单测，组件接线走构建产物断言。
+范围：真正需要浏览器的是交互件（暗色切换/打字机/copy-link 的点击链路与视觉），留待本地 Playwright 或带浏览器的环境，本云会话无 Chrome MCP。
+
 ---
 
 

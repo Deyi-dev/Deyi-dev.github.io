@@ -13,7 +13,8 @@ Figma REST API 路径开发完成（MCP 额度耗尽后的备选方案，效果�
 ## 上次停在哪
 执行 roadmap.md 的增长基建路线（调研 Simon Willison / Stratechery 后沉淀）。
 - 已完成 P1：绑定 deyi.dev（astro.config site + public/CNAME）。待用户在注册商配 DNS：apex A 记录 → 185.199.108-111.153。
-- 已完成 P2：SEO + RSS + OG。新增 feed.xml.ts、sitemap 集成、robots.txt；BaseLayout + 文章页加 description/canonical/OG/Twitter/JSON-LD；纯逻辑在 src/utils/{seo,feed}.ts（红-绿 TDD，76 tests pass）。
+- 已完成 P2：SEO + RSS + OG。新增 feed.xml.ts、sitemap 集成、robots.txt；BaseLayout + 文章页加 description/canonical/OG/Twitter/JSON-LD；纯逻辑在 src/utils/{seo,feed}.ts（红-绿 TDD）。
+- 已补 P2 产物断言测试：tests/seo-output.test.ts（DOMParser 解析 dist/ 的 head，断言 meta/JSON-LD/feed/sitemap/robots/CNAME；beforeAll 缺 dist 时自构建）。全套 92 tests pass。
 
 ## 下一步（按 roadmap.md）
 1. P3：收集邮箱（Buttondown 起步，POSSE 模式）
