@@ -17,7 +17,8 @@ Figma REST API 路径开发完成（MCP 额度耗尽后的备选方案，效果�
 - 已补 P2 产物断言测试：tests/seo-output.test.ts（DOMParser 解析 dist/ 的 head，断言 meta/JSON-LD/feed/sitemap/robots/CNAME；beforeAll 缺 dist 时自构建）。全套 92 tests pass。
 
 ## 下一步（按 roadmap.md）
-1. P3：收集邮箱（Buttondown 起步，POSSE 模式）
+1. P3：收集邮箱 — 已决策 Buttondown（D16，广撒网后按「极简/Markdown/开发者审美」收敛）。
+   待用户：在 buttondown.com 注册账号 → 把 username（embed 表单 URL 用到）发我 → 我接入嵌表单 + RSS→邮件配置。
 2. P4：搜索（Pagefind）+ 统计（Plausible）
 3. P5（可选）：评论 / 多内容类型 / AI-JSON
 

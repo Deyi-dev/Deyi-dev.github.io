@@ -67,6 +67,13 @@ Append-only。重审旧决策时新增条目，旧条目只允许追加"状态"�
 原因：meta/JSON-LD/RSS/sitemap 是静态文本产物，无运行时交互，浏览器点击帮不上忙。在 jsdom 环境用 DOMParser 解析 dist/ 的 <head> 即可断言（tests/seo-output.test.ts，beforeAll 缺 dist 时自构建）。扩展 D11：纯逻辑走 src/utils/ 单测，组件接线走构建产物断言。
 范围：真正需要浏览器的是交互件（暗色切换/打字机/copy-link 的点击链路与视觉），留待本地 Playwright 或带浏览器的环境，本云会话无 Chrome MCP。
 
+[2026-05-24-D16] P3 选 Buttondown 作为 ESP（POSSE 管道，不当家）
+原因：广撒网评估 5 类共十余款（MailerLite/Buttondown/EmailOctopus/Kit/Sender；Resend/Loops；Listmonk/Keila/Sendy；Substack/Beehiiv/Ghost）后，按「现阶段最看重：极简 / Markdown / 开发者审美」收敛到 Buttondown。
+- 契合点：Markdown-first、原生 RSS→邮件（直接喂 P2 的 /feed.xml）、嵌入式表单零后端、导出友好、API 完备。
+- 代价：免费仅 ≤100 订阅（接受，触顶再评估）；增长网络弱（用 P0 分发补）。
+- 排除：MailerLite/Kit 全能但与「极简/Markdown」气质不符；Substack/Beehiiv 是「平台即家」与 deyi.dev SEO 策略冲突；Listmonk/Ghost 自托管违背零运维静态站初衷；Resend 需 serverless 端点收表单，破坏纯静态。
+- 关键洞见（来自本轮调研）：名单可导出 ≠ 拥有受众；真正不可携带的是「增长机制」。Buttondown 几乎无平台增长引擎依赖，这反而让「迁出零代价」成立。
+
 ---
 
 
