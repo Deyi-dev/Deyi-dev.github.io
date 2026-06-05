@@ -47,6 +47,33 @@ Append-only。重审旧决策时新增条目，旧条目只允许追加"状态"�
 模式：组件 JS 超出简单 DOM 操作时（如主题切换），逻辑提取为 src/utils/ 纯 TS 函数，组件保持薄壳。
 重审：需要测试 Astro 组件渲染输出时引入 @astrojs/test-utils 或 Playwright。
 
+[2026-05-24-D12] 绑定自有域名 deyi.dev，替代 deyi-dev.github.io
+原因：SEO 权重/外链/读者认知累积到自有域名上；将来换平台可无损平移 URL，避免被 github.io 锁定。这是「先静态攒用户、要付费再迁移」整条渐进路线成立的前提。
+实现：astro.config.mjs site 改为 https://deyi.dev；新增 public/CNAME=deyi.dev。DNS 侧需在注册商配 apex A 记录指向 GitHub Pages（185.199.108-111.153）。
+
+[2026-05-24-D13] 补齐 SEO + RSS + OG 基建
+原因：体检发现可发现性基建几乎全缺——/feed.xml 指向 404、无 description/canonical/OG/sitemap/robots/JSON-LD。这些是「被搜到/被分享」的入场券，且全是构建期产物，契合静态架构与最小依赖原则。
+实现：
+- @astrojs/rss → src/pages/feed.xml.ts（修好原 RSS 图标的坏链；同时是「博客→邮件」桥）。
+- @astrojs/sitemap → 自动生成 sitemap-index.xml；public/robots.txt 指向它。
+- BaseLayout + 文章页加 description / canonical / OG / Twitter Card meta，OG 图复用 frontmatter 的 thumbnail（首页缺省用 /images/robot.png）。
+- 文章页加 schema.org BlogPosting JSON-LD。
+遵循 D11：可测纯逻辑抽到 src/utils/seo.ts、src/utils/feed.ts（absoluteUrl / buildArticleJsonLd / postsToFeedItems），红-绿 TDD，组件/端点保持薄壳。
+
+[2026-05-24-D14] OG 分享卡片与 Google SEO 区别对待
+原因：OG/Twitter Card 服务「被分享」渠道（X/LinkedIn/微信预览），早期真实流量主要来自分享而非 Google，故其实际优先级高于纯 Google SEO。技术上与 SEO meta 一起做，但目的不同。
+
+[2026-05-24-D15] SEO/OG/feed「接线」用产物断言测试，不用浏览器
+原因：meta/JSON-LD/RSS/sitemap 是静态文本产物，无运行时交互，浏览器点击帮不上忙。在 jsdom 环境用 DOMParser 解析 dist/ 的 <head> 即可断言（tests/seo-output.test.ts，beforeAll 缺 dist 时自构建）。扩展 D11：纯逻辑走 src/utils/ 单测，组件接线走构建产物断言。
+范围：真正需要浏览器的是交互件（暗色切换/打字机/copy-link 的点击链路与视觉），留待本地 Playwright 或带浏览器的环境，本云会话无 Chrome MCP。
+
+[2026-05-24-D16] P3 选 Buttondown 作为 ESP（POSSE 管道，不当家）
+原因：广撒网评估 5 类共十余款（MailerLite/Buttondown/EmailOctopus/Kit/Sender；Resend/Loops；Listmonk/Keila/Sendy；Substack/Beehiiv/Ghost）后，按「现阶段最看重：极简 / Markdown / 开发者审美」收敛到 Buttondown。
+- 契合点：Markdown-first、原生 RSS→邮件（直接喂 P2 的 /feed.xml）、嵌入式表单零后端、导出友好、API 完备。
+- 代价：免费仅 ≤100 订阅（接受，触顶再评估）；增长网络弱（用 P0 分发补）。
+- 排除：MailerLite/Kit 全能但与「极简/Markdown」气质不符；Substack/Beehiiv 是「平台即家」与 deyi.dev SEO 策略冲突；Listmonk/Ghost 自托管违背零运维静态站初衷；Resend 需 serverless 端点收表单，破坏纯静态。
+- 关键洞见（来自本轮调研）：名单可导出 ≠ 拥有受众；真正不可携带的是「增长机制」。Buttondown 几乎无平台增长引擎依赖，这反而让「迁出零代价」成立。
+
 ---
 
 
