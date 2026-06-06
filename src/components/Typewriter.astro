@@ -20,10 +20,11 @@
     const phaseTwoEnd = phaseOneEnd + firstWord.length;
 
     function render(frame: { accent: string; plain: string }) {
+      const plainHtml = frame.plain ? '<span class="suffix">' + frame.plain + '</span>' : '';
       if (frame.accent.length === 0) {
-        el!.innerHTML = frame.plain;
+        el!.innerHTML = plainHtml;
       } else {
-        el!.innerHTML = '<span class="accent">' + frame.accent + '</span>' + frame.plain;
+        el!.innerHTML = '<span class="accent">' + frame.accent + '</span>' + plainHtml;
       }
     }
 

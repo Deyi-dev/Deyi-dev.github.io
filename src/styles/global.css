@@ -154,6 +154,10 @@ a {
   color: var(--color-accent);
 }
 
+.typewriter .suffix {
+  color: var(--color-year-2025);
+}
+
 
 /* Article list */
 .year-section {

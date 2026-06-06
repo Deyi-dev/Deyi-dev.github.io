@@ -74,7 +74,18 @@ Append-only。重审旧决策时新增条目，旧条目只允许追加"状态"�
 - 排除：MailerLite/Kit 全能但与「极简/Markdown」气质不符；Substack/Beehiiv 是「平台即家」与 deyi.dev SEO 策略冲突；Listmonk/Ghost 自托管违背零运维静态站初衷；Resend 需 serverless 端点收表单，破坏纯静态。
 - 关键洞见（来自本轮调研）：名单可导出 ≠ 拥有受众；真正不可携带的是「增长机制」。Buttondown 几乎无平台增长引擎依赖，这反而让「迁出零代价」成立。
 
+[2026-06-05-D17] 导航暂时收敛为 Blog + Doodle，隐藏 Projects/About
+原因：Projects/About 当前内容仍是占位/样例（projects.astro 三条假项目），过早曝光不如先藏起来；等真有内容再放出。Doodle 作为新入口占位（页面留空），先把位置占住、形成习惯。
+实现：Header.astro 用 {/* */} 注释掉 Projects/About 两个 <a>，仅从导航移除——页面文件（projects.astro/about.astro）保留，/projects、/about 直链仍可访问、仍照常构建（build.test.ts 不动）。恢复时删掉注释标记即可。新增 src/pages/doodle.astro（空 main）。
+同时去掉 Header 的 "engineer, painter, snowboarder" 副标题。
+
+[2026-06-05-D18] 打字机 "in AI" 取中段年份色，绑定变量而非硬编码
+原因：首页打字机后缀 "in AI" 原为正文色，缺层次；取博客标题三色梯度（2026/2025/2024）的中间色作呼应。
+实现：Typewriter.astro 渲染时把 plain 后缀包进 <span class="suffix">；global.css 加 .typewriter .suffix { color: var(--color-year-2025) }——绑变量，将来调色自动同步，明暗两套主题各自取值。
+
 ---
 
 
 [2026-04-02-I3] 验证 RSS 和 SEO, maybe seo  for ai agent
+
+
