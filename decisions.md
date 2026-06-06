@@ -79,9 +79,6 @@ Append-only。重审旧决策时新增条目，旧条目只允许追加"状态"�
 实现：Header.astro 用 {/* */} 注释掉 Projects/About 两个 <a>，仅从导航移除——页面文件（projects.astro/about.astro）保留，/projects、/about 直链仍可访问、仍照常构建（build.test.ts 不动）。恢复时删掉注释标记即可。新增 src/pages/doodle.astro（空 main）。
 同时去掉 Header 的 "engineer, painter, snowboarder" 副标题。
 
-[2026-06-05-D18] 打字机 "in AI" 取中段年份色，绑定变量而非硬编码
-原因：首页打字机后缀 "in AI" 原为正文色，缺层次；取博客标题三色梯度（2026/2025/2024）的中间色作呼应。
-实现：Typewriter.astro 渲染时把 plain 后缀包进 <span class="suffix">；global.css 加 .typewriter .suffix { color: var(--color-year-2025) }——绑变量，将来调色自动同步，明暗两套主题各自取值。
 
 ---
 
